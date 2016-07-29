@@ -1,0 +1,41 @@
+body
+  background #000
+
+//cos:x = r*cos(multiple*symbol*degree)
+cosVal(r,mul,degree = 360 / 7)
+    round(r * cos(mul  * degree deg))
+//sin:y = r*sin(multiple*degree)
+sinVal(r,mul,degree = 360 / 7)
+    round(r * sin(mul * degree deg))
+  
+for index in 1..7
+  .explosion{index}
+    animation explosion+index 3s linear 1s infinite
+    animation-fill-mode afterwards
+for time in 1..2
+  @keyframes explosion{time}
+    0%{
+      transform translate(cosVal(0,time),sinVal(0,time)) scale(0)
+      opacity 0
+    }
+    20%{
+      transform translate(cosVal(50,time),sinVal(50,time)) scale(1)
+      opacity 0.5
+    }
+    40%{
+      transform translate(cosVal(100,time),sinVal(100,time)) scale(0.8)
+      opacity 1
+    }
+    60%{
+      transform translate(cosVal(150,time),sinVal(150,time)) scale(0.6)
+      opacity 1
+    }
+    80%{
+      transform translate(cosVal(200,time),sinVal(200,time)) scale(0.4)
+      opacity 0.5
+    }
+    100%{
+      transform translate(cosVal(250,time),sinVal(250,time)) scale(0.2)
+      opacity 0
+    }
+    
