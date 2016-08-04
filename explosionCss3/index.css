@@ -1,0 +1,239 @@
+body {
+  background: #000;
+}
+.explosion1 {
+  animation: explosion1 3s linear 1s infinite;
+  animation-fill-mode: afterwards;
+}
+.explosion2 {
+  animation: explosion2 3s linear 1s infinite;
+  animation-fill-mode: afterwards;
+}
+.explosion3 {
+  animation: explosion3 3s linear 1s infinite;
+  animation-fill-mode: afterwards;
+}
+.explosion4 {
+  animation: explosion4 3s linear 1s infinite;
+  animation-fill-mode: afterwards;
+}
+.explosion5 {
+  animation: explosion5 3s linear 1s infinite;
+  animation-fill-mode: afterwards;
+}
+.explosion6 {
+  animation: explosion6 3s linear 1s infinite;
+  animation-fill-mode: afterwards;
+}
+.explosion7 {
+  animation: explosion7 3s linear 1s infinite;
+  animation-fill-mode: afterwards;
+}
+@-moz-keyframes explosion1 {
+  0% {
+    transform: translate(0, 0) scale(0);
+    opacity: 0;
+  }
+  20% {
+    transform: translate(31, 39) scale(1);
+    opacity: 0.5;
+  }
+  40% {
+    transform: translate(62, 78) scale(0.8);
+    opacity: 1;
+  }
+  60% {
+    transform: translate(94, 117) scale(0.6);
+    opacity: 1;
+  }
+  80% {
+    transform: translate(125, 156) scale(0.4);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translate(156, 195) scale(0.2);
+    opacity: 0;
+  }
+}
+@-webkit-keyframes explosion1 {
+  0% {
+    transform: translate(0, 0) scale(0);
+    opacity: 0;
+  }
+  20% {
+    transform: translate(31, 39) scale(1);
+    opacity: 0.5;
+  }
+  40% {
+    transform: translate(62, 78) scale(0.8);
+    opacity: 1;
+  }
+  60% {
+    transform: translate(94, 117) scale(0.6);
+    opacity: 1;
+  }
+  80% {
+    transform: translate(125, 156) scale(0.4);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translate(156, 195) scale(0.2);
+    opacity: 0;
+  }
+}
+@-o-keyframes explosion1 {
+  0% {
+    transform: translate(0, 0) scale(0);
+    opacity: 0;
+  }
+  20% {
+    transform: translate(31, 39) scale(1);
+    opacity: 0.5;
+  }
+  40% {
+    transform: translate(62, 78) scale(0.8);
+    opacity: 1;
+  }
+  60% {
+    transform: translate(94, 117) scale(0.6);
+    opacity: 1;
+  }
+  80% {
+    transform: translate(125, 156) scale(0.4);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translate(156, 195) scale(0.2);
+    opacity: 0;
+  }
+}
+@keyframes explosion1 {
+  0% {
+    transform: translate(0, 0) scale(0);
+    opacity: 0;
+  }
+  20% {
+    transform: translate(31, 39) scale(1);
+    opacity: 0.5;
+  }
+  40% {
+    transform: translate(62, 78) scale(0.8);
+    opacity: 1;
+  }
+  60% {
+    transform: translate(94, 117) scale(0.6);
+    opacity: 1;
+  }
+  80% {
+    transform: translate(125, 156) scale(0.4);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translate(156, 195) scale(0.2);
+    opacity: 0;
+  }
+}
+@-moz-keyframes explosion2 {
+  0% {
+    transform: translate(0, 0) scale(0);
+    opacity: 0;
+  }
+  20% {
+    transform: translate(-11, 49) scale(1);
+    opacity: 0.5;
+  }
+  40% {
+    transform: translate(-22, 97) scale(0.8);
+    opacity: 1;
+  }
+  60% {
+    transform: translate(-33, 146) scale(0.6);
+    opacity: 1;
+  }
+  80% {
+    transform: translate(-45, 195) scale(0.4);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translate(-56, 244) scale(0.2);
+    opacity: 0;
+  }
+}
+@-webkit-keyframes explosion2 {
+  0% {
+    transform: translate(0, 0) scale(0);
+    opacity: 0;
+  }
+  20% {
+    transform: translate(-11, 49) scale(1);
+    opacity: 0.5;
+  }
+  40% {
+    transform: translate(-22, 97) scale(0.8);
+    opacity: 1;
+  }
+  60% {
+    transform: translate(-33, 146) scale(0.6);
+    opacity: 1;
+  }
+  80% {
+    transform: translate(-45, 195) scale(0.4);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translate(-56, 244) scale(0.2);
+    opacity: 0;
+  }
+}
+@-o-keyframes explosion2 {
+  0% {
+    transform: translate(0, 0) scale(0);
+    opacity: 0;
+  }
+  20% {
+    transform: translate(-11, 49) scale(1);
+    opacity: 0.5;
+  }
+  40% {
+    transform: translate(-22, 97) scale(0.8);
+    opacity: 1;
+  }
+  60% {
+    transform: translate(-33, 146) scale(0.6);
+    opacity: 1;
+  }
+  80% {
+    transform: translate(-45, 195) scale(0.4);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translate(-56, 244) scale(0.2);
+    opacity: 0;
+  }
+}
+@keyframes explosion2 {
+  0% {
+    transform: translate(0, 0) scale(0);
+    opacity: 0;
+  }
+  20% {
+    transform: translate(-11, 49) scale(1);
+    opacity: 0.5;
+  }
+  40% {
+    transform: translate(-22, 97) scale(0.8);
+    opacity: 1;
+  }
+  60% {
+    transform: translate(-33, 146) scale(0.6);
+    opacity: 1;
+  }
+  80% {
+    transform: translate(-45, 195) scale(0.4);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translate(-56, 244) scale(0.2);
+    opacity: 0;
+  }
+}
