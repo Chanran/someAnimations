@@ -28,13 +28,30 @@
     var canvas = document.getElementById('canvas');
     var ctx = canvas.getContext('2d');
 
-    function drawRect(){
-        ctx.fillStyle = "yellow"; 
-        ctx.fillRect(canvas.width/2,canvas.height/2,50,50)
-        ctx.fill();
+
+    function init(){
+      window.requestAnimationFrame(drawRect);
     }
 
-    drawRect();
+    var right = 0;
+    var v0 = 30;
+    var v = v0;
+    var a = -1;
+    var t = 0;
+    function drawRect(){
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        ctx.fillStyle = "yellow"; 
+        ctx.fillRect(right,canvas.height/2,50,50);
+        ctx.fill();
+        if(right >= 0 && t < 60){
+          t++;
+          console.log(t);
+          v = v0+a*t;
+          right = v0*t + a*t*t/2;
+          window.requestAnimationFrame(drawRect);
+        }
+    }
+    init();
 
   </script>
 </body>
