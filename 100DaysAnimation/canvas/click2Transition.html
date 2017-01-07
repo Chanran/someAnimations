@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>click to transition</title>
+    <style type="text/css">
+        *{
+            margin:0;
+            padding:0;
+        }
+        html,body{
+            border:1px solid rgba(0,0,0,0);
+        }
+        #canvas{
+            display:block;
+            margin:0 auto;
+        }
+        #input{
+            margin-top:50px;
+            text-align:center;
+        }
+        #buttons{
+            text-align:center;
+        }
+    </style>
+</head>
+<body>
+    <div id="input">
+        <input id="moveDistance" type="text">
+    </div>
+    <div id="buttons">
+        <button id="left" type="button">左移</button>
+        <button id="right" type="text">右移</button>
+        <button id="up" type="text">上移</button>
+        <button id="down" type="text">下移</button>
+    </div>
+    <canvas id="canvas" width="600" height="600">
+        canvas not supported
+    </canvas>
+    <script type="text/javascript">
+        var canvas = document.getElementById('canvas'),
+            ctx = canvas.getContext('2d');
+        var leftBtn = document.getElementById('left'),
+            rightBtn = document.getElementById('right'),
+            upBtn = document.getElementById('up'),
+            downBtn = document.getElementById('down');
+        var moveDistance = document.getElementById('moveDistance');
+        var x = canvas.width/2,
+            y = canvas.height/2;
+
+        function init(){
+            ctx.fillStyle = 'yellow';
+            ctx.fillRect(canvas.width/2,canvas.height/2,50,50);
+        }
+
+        leftBtn.addEventListener('click',function(){
+            if (moveDistance.value > 0){
+                ctx.clearRect(0,0,canvas.width,canvas.height);
+                ctx.fillStyle = 'yellow';
+                ctx.translate(-1*moveDistance.value,0);
+                ctx.fillRect(canvas.width/2,canvas.height/2,50,50);
+                ctx.setTransform(1,0,0,1,0,0);
+            }else{
+                alert('移动距离必须为正数！');   
+            }
+            
+        });
+        rightBtn.addEventListener('click',function(){
+            if (moveDistance.value > 0){
+                ctx.clearRect(0,0,canvas.width,canvas.height);
+                ctx.fillStyle = 'yellow';
+                ctx.translate(moveDistance.value,0);
+                ctx.fillRect(canvas.width/2,canvas.height/2,50,50);
+                ctx.setTransform(1,0,0,1,0,0);
+            }else{
+                alert('移动距离必须为正数！');
+            }
+        });
+        upBtn.addEventListener('click',function(){
+             if (moveDistance.value > 0){
+                ctx.clearRect(0,0,canvas.width,canvas.height);
+                ctx.fillStyle = 'yellow';
+                ctx.translate(0,-1*moveDistance.value);
+                ctx.fillRect(canvas.width/2,canvas.height/2,50,50);
+                ctx.setTransform(1,0,0,1,0,0);
+            }else{
+                alert('移动距离必须为正数！');
+            }
+        });
+        downBtn.addEventListener('click',function(){
+            if (moveDistance.value > 0){
+                ctx.clearRect(0,0,canvas.width,canvas.height);
+                ctx.fillStyle = 'yellow';
+                ctx.translate(0,moveDistance.value);
+                ctx.fillRect(canvas.width/2,canvas.height/2,50,50);
+                ctx.setTransform(1,0,0,1,0,0);
+            }else{
+                alert('移动距离必须为正数！');
+            } 
+        });
+
+        init();
+    </script>
+</body>
+</html>
