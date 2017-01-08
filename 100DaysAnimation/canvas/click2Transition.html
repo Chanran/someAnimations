@@ -50,50 +50,70 @@
 
         function init(){
             ctx.fillStyle = 'yellow';
-            ctx.fillRect(canvas.width/2,canvas.height/2,50,50);
+            ctx.fillRect(x,y,50,50);
         }
 
         leftBtn.addEventListener('click',function(){
             if (moveDistance.value > 0){
-                ctx.clearRect(0,0,canvas.width,canvas.height);
-                ctx.fillStyle = 'yellow';
-                ctx.translate(-1*moveDistance.value,0);
-                ctx.fillRect(canvas.width/2,canvas.height/2,50,50);
-                ctx.setTransform(1,0,0,1,0,0);
+                if (x-parseInt(moveDistance.value)-50 >= 0){
+                    ctx.clearRect(0,0,canvas.width,canvas.height);
+                    ctx.fillStyle = 'yellow';
+                    ctx.translate(-1*parseInt(moveDistance.value),0);
+                    ctx.fillRect(x,y,50,50);
+                    ctx.setTransform(1,0,0,1,0,0);
+                    x-=parseInt(moveDistance.value);
+                }else{
+                    alert('超过画布啦！');
+                }
             }else{
                 alert('移动距离必须为正数！');   
             }
             
         });
         rightBtn.addEventListener('click',function(){
-            if (moveDistance.value > 0){
-                ctx.clearRect(0,0,canvas.width,canvas.height);
-                ctx.fillStyle = 'yellow';
-                ctx.translate(moveDistance.value,0);
-                ctx.fillRect(canvas.width/2,canvas.height/2,50,50);
-                ctx.setTransform(1,0,0,1,0,0);
+            if (parseInt(moveDistance.value) > 0){
+                if (x+parseInt(moveDistance.value)+50 <= canvas.height){
+                    ctx.clearRect(0,0,canvas.width,canvas.height);
+                    ctx.fillStyle = 'yellow';
+                    ctx.translate(parseInt(moveDistance.value),0);
+                    ctx.fillRect(x,y,50,50);
+                    ctx.setTransform(1,0,0,1,0,0);
+                    x+=parseInt(moveDistance.value);
+                }else{
+                    alert('超过画布啦！');
+                }
             }else{
                 alert('移动距离必须为正数！');
             }
         });
         upBtn.addEventListener('click',function(){
-             if (moveDistance.value > 0){
-                ctx.clearRect(0,0,canvas.width,canvas.height);
-                ctx.fillStyle = 'yellow';
-                ctx.translate(0,-1*moveDistance.value);
-                ctx.fillRect(canvas.width/2,canvas.height/2,50,50);
-                ctx.setTransform(1,0,0,1,0,0);
+             if (parseInt(moveDistance.value) > 0){
+                if (y-parseInt(moveDistance.value)-50 >=0){
+                    ctx.clearRect(0,0,canvas.width,canvas.height);
+                    ctx.fillStyle = 'yellow';
+                    ctx.translate(0,-1*parseInt(moveDistance.value));
+                    ctx.fillRect(x,y,50,50);
+                    ctx.setTransform(1,0,0,1,0,0);
+                    y-=parseInt(moveDistance.value);
+                }else{
+                    alert('超过画布啦！');
+                }
             }else{
                 alert('移动距离必须为正数！');
             }
         });
         downBtn.addEventListener('click',function(){
-            if (moveDistance.value > 0){
-                ctx.clearRect(0,0,canvas.width,canvas.height);
-                ctx.fillStyle = 'yellow';
-                ctx.translate(0,moveDistance.value);
-                ctx.fillRect(canvas.width/2,canvas.height/2,50,50);
-                ctx.setTransform(1,0,0,1,0,0);
+            if (parseInt(moveDistance.value) > 0){
+                if (y+parseInt(moveDistance.value)+50 <= canvas.height){
+                    ctx.clearRect(0,0,canvas.width,canvas.height);
+                    ctx.fillStyle = 'yellow';
+                    ctx.translate(0,parseInt(moveDistance.value));
+                    ctx.fillRect(x,y,50,50);
+                    ctx.setTransform(1,0,0,1,0,0);
+                    y+=moveDistance.value;
+                }else{
+                    alert('超过画布啦！');
+                }
             }else{
                 alert('移动距离必须为正数！');
             } 
