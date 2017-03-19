@@ -1,3 +1,3 @@
-#canvas爆开效果
-#
-##实例地址：http://codepen.io/Chanran/pen/QEVkpX?editors=1111
+# canvas爆开效果
+
+> 实例地址：http://codepen.io/Chanran/pen/QEVkpX?editors=1111
