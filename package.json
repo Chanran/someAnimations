@@ -1,0 +1,25 @@
+{
+  "name": "animations",
+  "version": "1.0.0",
+  "description": "some animations",
+  "main": "index.js",
+  "scripts": {
+    "watch": "browser-sync start --server --files '**/*.css, **/*.html, **/*.js'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Chanran/someAnimations.git"
+  },
+  "keywords": [
+    "css3",
+    "canvas",
+    "svg",
+    "webgl"
+  ],
+  "author": "blue",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Chanran/someAnimations/issues"
+  },
+  "homepage": "https://github.com/Chanran/someAnimations#readme"
+}
