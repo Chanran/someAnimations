@@ -1,0 +1,5 @@
+{
+  "globalDependencies": {
+    "webgl2": "registry:dt/webgl2#0.0.0+20170321023124"
+  }
+}

@@ -11,6 +11,7 @@ PS:纯粹学习的时候练手的。
 ```
   # 安装browser-sync
   npm install -g browser-sync
+  npm i
 ```
 
 ### 调试

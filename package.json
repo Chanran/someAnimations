@@ -21,5 +21,8 @@
   "bugs": {
     "url": "https://github.com/Chanran/someAnimations/issues"
   },
-  "homepage": "https://github.com/Chanran/someAnimations#readme"
+  "homepage": "https://github.com/Chanran/someAnimations#readme",
+  "dependencies": {
+    "normalize.css": "^6.0.0"
+  }
 }
