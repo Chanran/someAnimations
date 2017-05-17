@@ -5,10 +5,10 @@ var gl; // webGL全局变量
 function start() {
   var canvas = document.getElementById('glcanvas');
 
-  // 初始化 webGL 上下文
+  // 初始化 WebGL 上下文
   gl = initWebGL(canvas);
 
-  // 只有webGL可用的时候才继续
+  // 只有WebGL可用的时候才继续
 
   if (gl) {
     // 设置清除颜色为黑色，不透明
@@ -39,4 +39,30 @@ function initWebGL(canvas) {
     gl = null;
   }
   return gl;
+}
+
+function initShaders() {
+  // 片元着色器
+  var fragmentShader = getShader(gl, "shader-fs");
+  // 顶点着色器
+  var vertexShader = getShader(gl,'shader-vs');
+
+  // 创建着色器
+
+  shaderProgram = gl.createProgram();
+  gl.attachShader(shaderProgram, fragmentShader);
+  gl.attachShader(shaderProgram, vertexShader);
+  gl.linkProgram(shaderProgram);
+
+  // 如果创建着色器失败
+
+  if (!gl.getProgramParameter(shaderProgram, gl.LINK_STATUS)) {
+    alert('Unable to initalize the shader program.');
+  }
+
+  gl.useProgram(shaderProgram);
+
+  vertexPositionAttribute = gl.getAttribLocation(shaderProgram, "aVertexPosition");
+  gl.enableVertexAttribArray(vertexPositionAttribute);
+
 }
