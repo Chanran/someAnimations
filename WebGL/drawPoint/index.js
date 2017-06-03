@@ -47,11 +47,16 @@ function main(){
 var g_points = [];
 
 function drawPoint(event, gl, canvas, a_Position, a_PointSize) {
-  var x = event.clientX;
-  var y = event.clientY;
-  var rect = event.target.getBoundingClientRect();
-  x = ((x - rect.left) - canvas.height / 2) / (canvas.height / 2);
-  y = (canvas.width / 2 - (y - rect.top)) / (canvas.width / 2);
+  var x = event.clientX; // 鼠标点击的x坐标
+  var y = event.clientY; // 鼠标点击的y坐标
+  var rect = event.target.getBoundingClientRect(); // 得到canvas的rect对象
+  // console.log(x);
+  // console.log(y);
+  // console.log(rect);
+  x = ((x - rect.left) - canvas.width / 2) / (canvas.width / 2); // 转化成WebGL坐标
+  y = (canvas.height / 2 - (y - rect.top)) / (canvas.height / 2); // 转化成WebGL坐标
+  // console.log(x);
+  // console.log(y);
   g_points.push(x);
   g_points.push(y);
 
