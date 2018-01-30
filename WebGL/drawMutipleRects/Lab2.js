@@ -205,6 +205,8 @@ Lab2.prototype.init = function () {
     return;
   }
 
+  var colorList = document.getElementById('colorList');
+
   // Set up callback to render a frame
   var render = function () {
     t.Render();
@@ -218,12 +220,66 @@ Lab2.prototype.init = function () {
               rgbaSliders[i].value / rgbaSliders[i].max;
     }
     
-    // Clear vertex coords and colors (we don't need to rewrite buffers,
+    // Clear vertex coords and colors (we don't nvalueeed to rewrite buffers,
     // since redraw only draw number of points in vertexCoords)
     t.vertexCoords.length = 0;
     t.vertexColors.length = 0;
+    t.rectangleCoords.length = 0;
+    t.rectangleColors.length = 0;
+    t.rectangleIndexs.length = 0;
     requestAnimationFrame(render);
   });
+
+  colorList.addEventListener("click", function (e) {
+    var colorText = e.srcElement.textContent;
+    var red = 0.0;
+    var green = 0.0;
+    var blue = 0.0;
+    var alpha = 1.0;
+    switch (colorText) {
+      
+      case "white":
+        red = 1.0;
+        green = 1.0;
+        blue = 1.0;
+        break;
+      case "black":
+        break;
+      case "red":
+        red = 1.0;
+        break;
+      case "yellow":
+        red = 1.0;
+        green = 1.0;
+        break;
+      case "green": 
+        green = 1.0;
+        break;
+      case "cyan":
+        green = 1.0;
+        blue = 1.0;
+        break;
+      case "blue":
+        blue = 1.0;
+        break;
+      case "pinkish red":
+        red = 1.0;
+        blue = 1.0;
+        break;
+      default:
+        break;
+    }
+
+
+    rgbaSliders['r'].value = red;
+    rgbaSliders['r'].valueDisplay.textContent = red
+    rgbaSliders['g'].value = green;
+    rgbaSliders['g'].valueDisplay.textContent = green
+    rgbaSliders['b'].value = blue;
+    rgbaSliders['b'].valueDisplay.textContent = blue
+    rgbaSliders['a'].value = alpha;
+    rgbaSliders['a'].valueDisplay.textContent = alpha
+  })
 
   // Set up mouse tracking
   this.mouseMove = false;  // track mouse button state
