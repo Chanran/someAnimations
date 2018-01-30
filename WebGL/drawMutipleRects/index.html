@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<!--
+Lab 2 - COMP3801 Winter 2017
+  Basic WebGL shaders, mouse events and coordinates
+
+  Sample Solution
+-->
+<html>
+  <head>
+    <title>Lab 2</title>
+    <link rel="icon" type="image/png" href="COMP3801 favicon.png" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="Common/webgl-utils.js" type="text/javascript"></script>
+    <script src="Common/initShaders2.js" type="text/javascript"></script>
+    <script src="Common/MV.js" type="text/javascript"></script>
+    <script src="Lab2.js" type="text/javascript"></script>
+  </head>
+  <body onload="new Lab2('gl-canvas')">
+    <div align="center">
+      <div>
+        Mouse x: <span id="gl-canvas-mousex">?</span>
+        &nbsp;&nbsp;y: <span id="gl-canvas-mousey">?</span>
+        &nbsp;&nbsp;button: <span id="gl-canvas-mousebutton">?</span>
+      </div>
+      <div>
+        GL Mouse x: <span id="gl-canvas-gl-mousex">?</span>
+        &nbsp;&nbsp;y: <span id="gl-canvas-gl-mousey">?</span>
+      </div>
+      <canvas id="gl-canvas" width="512" height="512">
+        This browser doesn't support the HTML5 canvas element
+      </canvas>
+      <table border=1>
+        <tr style="background-color: red; color: white">
+          <td><input id="gl-canvas-r-slider" type="range" 
+                     min="0.0" max="1.0" value="0.5" step="0.01" style="width:200px" /></td>
+          <td>Red</td>
+          <td id="gl-canvas-r-value" style="width: 40px; text-align: center">0.5</td>
+        </tr>
+        <tr style="background-color: green; color: white">
+          <td><input id="gl-canvas-g-slider" type="range" 
+                     min="0.0" max="1.0" value="0.5" step="0.01" style="width:200px" /></td>
+          <td>Green</td>
+          <td id="gl-canvas-g-value" style="width: 40px; text-align: center">0.5</td>
+        </tr>
+        <tr style="background-color: blue; color: white">
+          <td><input id="gl-canvas-b-slider" type="range" 
+                     min="0.0" max="1.0" value="0.5" step="0.01" style="width:200px" /></td>
+          <td>Blue</td>
+          <td id="gl-canvas-b-value" style="width: 40px; text-align: center">0.5</td>
+        </tr>
+        <tr style="background: linear-gradient(to right, white, black); color: white">
+          <td><input id="gl-canvas-a-slider" type="range" 
+                     min="0.0" max="1.0" value="0.5" step="0.01" style="width:200px" /></td>
+          <td>Alpha</td>
+          <td id="gl-canvas-a-value" style="width: 40px; text-align: center">0.5</td>
+        </tr>
+      </table>
+      <button id="gl-canvas-reset-button">Reset</button>
+    </div>
+  </body>
+</html>
