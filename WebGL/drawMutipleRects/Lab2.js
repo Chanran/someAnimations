@@ -92,6 +92,41 @@ Lab2.prototype.init = function () {
   gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, null);
   
   
+  // temp rectangle buffer
+
+  // rectangle vertex coordinates
+  this.tmpRectangleCoords = [
+    vec3(0.0, 0.0, 0.0),
+    vec3(0.5, 0.0, 0.0),
+    vec3(0.0, 0.5, 0.0),
+    vec3(0.5, 0.5, 0.0),
+  ]
+  this.tmpRectangleColors = [
+    vec4(0.5,0.5,0.5,1.0),
+    vec4(0.5,0.5,0.5,1.0),
+    vec4(0.5,0.5,0.5,1.0),
+    vec4(0.5,0.5,0.5,1.0),
+  ]
+  this.tmpRectangleIndexs = [
+    0, 1, 2,
+    1, 2, 3,
+  ]
+  
+  this.tmpRectangleCoordBuffer = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, this.tmpRectangleCoordBuffer);
+  gl.bufferData(gl.ARRAY_BUFFER, flatten(this.tmpRectangleCoords), gl.STATIC_DRAW);
+  gl.bindBuffer(gl.ARRAY_BUFFER, null);
+  
+  this.tmpRectangleColorBuffer = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, this.tmpRectangleColorBuffer);
+  gl.bufferData(gl.ARRAY_BUFFER, flatten(this.tmpRectangleColors), gl.STATIC_DRAW);
+  gl.bindBuffer(gl.ARRAY_BUFFER, null);
+  
+  this.tmpRectangleIndexBuffer = gl.createBuffer()
+  gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.tmpRectangleIndexBuffer);
+  gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(this.tmpRectangleIndexs), gl.STATIC_DRAW);
+  gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, null);
+
 
   // Array of initial vertex coordinates
   this.vertexCoords = [
@@ -191,7 +226,7 @@ Lab2.prototype.init = function () {
   });
 
   // Set up mouse tracking
-  this.mouseDown = false;  // track mouse button state
+  this.mouseMove = false;  // track mouse button state
   this.drawingRectangle = false; // track drawing rectangle
   this.rectangleVertexIndex = 0;
   this.wMouseX = 0.0;
@@ -260,8 +295,12 @@ Lab2.prototype.init = function () {
     glMouseX.textContent = wx.toFixed(3);
     glMouseY.textContent = wy.toFixed(3);
 
-    if (t.mouseDown) {
+    if (t.drawingRectangle) {
+      t.updateTmpRect(t.wMouseX, t.wMouseY, t.wColor, wx, wy, t.getSliderColor())
+      t.mouseMove = true
       requestAnimationFrame(render);  // redraw
+    } else {
+      t.mouseMove = false
     }
   });
 
@@ -341,6 +380,28 @@ Lab2.prototype.drawRectangle = function (wx1, wy1, color1, wx2, wy2, color2) {
   gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, null);
 }
 
+Lab2.prototype.updateTmpRect = function (wx1, wy1, color1, wx2, wy2, color2) {
+  var gl = this.gl;
+  
+  // Add new coords
+  this.tmpRectangleCoords[0] = vec3(wx1, wy1, 0.0);
+  this.tmpRectangleCoords[1] = vec3(wx1, wy2, 0.0);
+  this.tmpRectangleCoords[2] = vec3(wx2, wy1, 0.0);
+  this.tmpRectangleCoords[3] = vec3(wx2, wy2, 0.0);
+  gl.bindBuffer(gl.ARRAY_BUFFER, this.tmpRectangleCoordBuffer);
+  gl.bufferData(gl.ARRAY_BUFFER, flatten(this.tmpRectangleCoords), gl.STATIC_DRAW);
+  gl.bindBuffer(gl.ARRAY_BUFFER, null);
+  
+  // Add new color
+  var averageColor = this.colorAverage(color1, color2);
+  this.tmpRectangleColors[0] = color1;
+  this.tmpRectangleColors[1] = averageColor;
+  this.tmpRectangleColors[2] = averageColor;
+  this.tmpRectangleColors[3] = color2;
+  gl.bindBuffer(gl.ARRAY_BUFFER, this.tmpRectangleColorBuffer);
+  gl.bufferData(gl.ARRAY_BUFFER, flatten(this.tmpRectangleColors), gl.STATIC_DRAW);
+}
+
 Lab2.prototype.colorAverage = function (color1, color2) {
   return vec4(
     (parseFloat(color1[0]) + parseFloat(color2[0])) / 2,
@@ -389,7 +450,6 @@ Lab2.prototype.Render = function () {
   
   gl.drawArrays(gl.POINTS, 0, this.vertexCoords.length);
   
-  console.log(this.drawingRectangle);
   if (this.rectangleCoords.length > 0) {
     gl.bindBuffer(gl.ARRAY_BUFFER, this.rectangleCoordBuffer);
     this.vPosition = gl.getAttribLocation(this.shaderProgram, "vPosition");
@@ -401,10 +461,23 @@ Lab2.prototype.Render = function () {
     gl.vertexAttribPointer(this.vColor, 4, gl.FLOAT, false, 0, 0);
     gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.rectangleIndexBuffer);
     
-    console.log(this.rectangleCoords);
-    console.log(this.rectangleColors);
-    console.log(this.rectangleIndexs);
     gl.drawElements(gl.TRIANGLES, this.rectangleIndexs.length, gl.UNSIGNED_SHORT, 0);
+  }
+  
+  // console.log(this.drawingRectangle);
+  console.log(this.mouseMove);
+  if (this.drawingRectangle && this.mouseMove) {
+    gl.bindBuffer(gl.ARRAY_BUFFER, this.tmpRectangleCoordBuffer);
+    this.vPosition = gl.getAttribLocation(this.shaderProgram, "vPosition");
+    gl.enableVertexAttribArray(this.vPosition);
+    gl.vertexAttribPointer(this.vPosition, 3, gl.FLOAT, false, 0, 0);
+    gl.bindBuffer(gl.ARRAY_BUFFER, this.tmpRectangleColorBuffer);
+    this.vColor = gl.getAttribLocation(this.shaderProgram, "vColor");
+    gl.enableVertexAttribArray(this.vColor);
+    gl.vertexAttribPointer(this.vColor, 4, gl.FLOAT, false, 0, 0);
+    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.tmpRectangleIndexBuffer);
+    
+    gl.drawElements(gl.TRIANGLES, this.tmpRectangleIndexs.length, gl.UNSIGNED_SHORT, 0);
   }
 };
   
