@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script src="../three.js"></script>
+  <script src="./OrbitControls.js"></script>
+  <script src="./inflate.min.js"></script>
+  <script src="./OBJLoader.js"></script>
+  <script>
+    var TextureLoader = new THREE.TextureLoader()
+    var OBJLoader = new THREE.OBJLoader()
+    var scene = new THREE.Scene();
+    var directionalLight = new THREE.DirectionalLight( 0xffffff, 0.5 );
+    directionalLight.position.set(10, 10, 10)
+    scene.add( directionalLight );
+    var light = new THREE.AmbientLight( 0x404040 ); // soft white light
+    scene.add( light );
+    var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
+    camera.position.set(0,10,5)
+    camera.lookAt(new THREE.Vector3(0,0,0))
+    var renderer = new THREE.WebGLRenderer();
+    renderer.setSize( window.innerWidth, window.innerHeight );
+    document.body.appendChild( renderer.domElement );
+
+    var controls = new THREE.OrbitControls( camera );
+
+    async function init() {
+      
+      var model = await loadModel()
+      var texture = await loadTexture()
+
+      // model.scale = new THREE.Vector3(100, 100, 100)
+      model.traverse( function ( child ) {
+        if ( child instanceof THREE.Mesh ) {
+          child.scale.copy(new THREE.Vector3(10, 10, 10))
+          child.material.map = texture;
+        }
+      } );
+
+      scene.add(model)
+
+      camera.position.z = 5;
+    }
+
+    function loadModel () {
+      return new Promise((resolve, reject) => {
+        OBJLoader.load('./Bulbasaur.obj', resolve)
+      })
+    }
+
+    function loadTexture () {
+      return new Promise((resolve, reject) => {
+        TextureLoader.load('./texture.jpg', resolve)
+      })
+    }
+    
+
+    function animate () {
+      requestAnimationFrame( animate );
+
+      controls.update();
+
+      renderer.render(scene, camera);
+    };
+
+    init()
+    animate();
+  </script>
+</body>
+</html>
