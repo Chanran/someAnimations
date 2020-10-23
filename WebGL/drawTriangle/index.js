@@ -1,22 +1,25 @@
 // 定义顶点着色器
 var VSHADER_SOURCE = 
-  'attribute vec4 a_position;\n' +
-  'attribute vec4 a_vertex_color;\n' +
-  'uniform mat4 uMVMatrix;\n' +
-  'uniform mat4 uPMatrix;\n' +
-  'varying vec4 vColor;\n' +
-  'void main(){\n' +
-  '  gl_Position = a_position;\n' +
-  '  vColor = a_vertex_color;\n' +
-  '}\n';
+  [
+    'attribute vec4 a_position;',
+    'attribute vec4 a_vertex_color;',
+    'uniform mat4 u_matrix;',
+    'varying vec4 vColor;',
+    'void main(){',
+    '  gl_Position = u_matrix * a_position;',
+    '  vColor = a_vertex_color;',
+    '}',
+  ].join('\n');
 
 // 定义片元着色器
 var FSHADER_SOURCE =
-  'precision mediump float;\n' +
-  'varying vec4 vColor;\n' +
-  'void main(){\n' +
-  'gl_FragColor = vColor;\n' +
-  '}\n';
+  [
+    'precision mediump float;',
+    'varying vec4 vColor;',
+    'void main(){',
+    '  gl_FragColor = vColor;',
+    '}',
+  ].join('\n');
 
 function main(){
   var canvas = document.getElementById('webgl');
@@ -37,10 +40,14 @@ function main(){
   var a_position = gl.getAttribLocation(gl.program, 'a_position');
   // 点颜色
   var a_vertex_color = gl.getAttribLocation(gl.program, 'a_vertex_color');
-  // MV矩阵 
-  var uMVMatrix = gl.getUniformLocation(gl.program, 'uMVMatrix');
-  // P矩阵
-  var uPMtrix = gl.getUniformLocation(gl.program, 'uPMatrix');
+  // MVP矩阵
+  var matrix = new Float32Array([
+    1.5, 0, 0, 0,
+    0, 1.5, 0, 0,
+    0, 0, 1.5, 0,
+    0, 0, 0, 1,
+  ])
+  var matrixLocation = gl.getUniformLocation(gl.program, 'u_matrix');
 
   if (a_position < 0) {
     console.log('Failed to get the storage location of a_position');
@@ -59,6 +66,9 @@ function main(){
     -0.5, -0.5, 0.0, 0.0, 1.0, 1.0  // 蓝色
   ])
 
+  // uniform
+  gl.uniformMatrix4fv(matrixLocation, false, matrix);
+
   // 创建buffer
   var vBuffer = gl.createBuffer();
   if (!vBuffer) {
@@ -76,7 +86,7 @@ function main(){
   gl.enableVertexAttribArray(a_position);
   gl.enableVertexAttribArray(a_vertex_color);
   
-  // 制定晴空canvas的颜色
+  // 制定清空canvas的颜色
   gl.clearColor(0.0, 0.0, 0.0, 1.0);
   // 清空canvas
   // gl.COLOR_BUFFER_BIT颜色缓存，默认清空色rgba(0.0, 0.0, 0.0, 0.0) 透明黑色，通过gl.clearColor指定
